@@ -30,8 +30,9 @@ app.post("/create-checkout-session", async (req, res) => {
                     quantity: item.quantity,
                 };
             }),
-            success_url: `https://for-cv-seven.vercel.app/success.html`,
-            cancel_url: `https://for-cv-seven.vercel.app/cancel.html`,
+            success_url: `${process.env.CLIENT_URL}/success.html`,
+            cancel_url: `${process.env.CLIENT_URL}/cancel.html`,
+            
         });
 
         res.json({ url: session.url });
@@ -40,4 +41,9 @@ app.post("/create-checkout-session", async (req, res) => {
     }
 });
 
-app.listen(3000, () => console.log("Server pornit pe http://localhost:5500"));
+app.listen(3000, () => console.log("Server pornit pe https://for-cv-seven.vercel.app/"));
+const allowedOrigin = process.env.NODE_ENV === 'production'
+    ? 'https://for-cv-seven.vercel.app'  // CORS pentru Vercel în producție
+    : 'http://localhost:5500';             // CORS pentru localhost în dezvoltare
+
+app.use(cors({ origin: allowedOrigin }));

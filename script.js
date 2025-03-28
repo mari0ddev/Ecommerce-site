@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
           quantity: item.quantity
       }));
 
-      fetch("https://for-cv-seven.vercel.app/create-checkout-session", {
+      fetch("https://for-cv-seven.vercel.app/create-checkout.html", {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
