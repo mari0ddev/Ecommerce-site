@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Bon de cumpărături</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="receipt">
+        <h2>🛒 Bon de cumpărături</h2>
+        <div id="cart-items"></div>
+        <hr>
+        <p><strong>Total: </strong><span id="total-price">0</span> LEI</p>
+        <button id="checkout-btn">Plătește</button>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartItemsContainer = document.getElementById("cart-items");
+            const totalPriceElement = document.getElementById("total-price");
+            const checkoutBtn = document.getElementById("checkout-btn");
+        
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let totalPrice = 0;
+        
+            function updateCartDisplay() {
+                cartItemsContainer.innerHTML = "";
+                totalPrice = 0;
+        
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = "<p>Coșul tău este gol.</p>";
+                    checkoutBtn.style.display = "none";
+                    return;
+                }
+        
+                cart.forEach((item, index) => {
+                    const div = document.createElement("div");
+                    div.classList.add("receipt-item");
+                    div.innerHTML = `
+                        <p>${item.quantity} x ${item.name} <span>${(item.quantity * item.price).toFixed(2)} LEI</span></p>
+                        <button class="remove-item" data-index="${index}">🗑️</button>
+                    `;
+                    cartItemsContainer.appendChild(div);
+                    totalPrice += item.quantity * item.price;
+                });
+        
+                totalPriceElement.textContent = totalPrice.toFixed(2);
+        
+                document.querySelectorAll(".remove-item").forEach(button => {
+                    button.addEventListener("click", function () {
+                        const index = this.getAttribute("data-index");
+                        cart.splice(index, 1);
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        updateCartDisplay();
+                    });
+                });
+            }
+        
+            updateCartDisplay();
+        
+            checkoutBtn.addEventListener("click", () => {
+                fetch("http://localhost:3000/create-checkout-session", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ items: cart }),
+                })
+                .then(res => res.json())
+                .then(({ url }) => window.location = url)
+                .catch(err => console.error("Eroare la checkout:", err));
+            });
+        });
+        </script>
+        
+    
+
+</body>
+</html>

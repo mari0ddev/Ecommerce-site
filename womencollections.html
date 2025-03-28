@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> 
+    <title>Collections</title>
+</head>
+<body>
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    
+    <header>
+        <a href="index.html">
+            <img class="logo" src="m_logo_black-removebg-preview.png" alt="Logo" >
+        </a>
+        
+        <nav> 
+            <ul class="nav-links">
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="collections.html">Collections</a></li>
+            </ul>
+        </nav>
+
+        <div class="hamburger">
+            <span id="hamburger-lines">&#9776;</span> 
+            <img src="black-x-10353.png" alt="Close Menu" width="30px"; id="hamburger-icon" style="display: none; " >
+        </div>
+    </header>
+
+
+<section id="collections " class="collections">
+    <h2>WOMEN COLLECTIONS</h2>
+<div class="collections-container">
+<div class="product">
+    <div class="card">
+      <img src="under-armour-hoodie-black-front-67c0719bbbb95.png" alt="hoodie">
+      <span>M|Clothing x Champion Hoodie</span>
+      <h5>300 RON</h5>
+    </div>
+   
+    <div class="card">
+        <img src="adidas-sport-polo-shirt-black-front-67e5c2dfce30d.png" alt="tshirt">
+        <span>M|Clothing x Adidas Women</span>
+        <h5>350RON</h5>
+      </div>
+
+      <div class="card">
+        <img src="a3afemcol.png" alt="tshirt">
+        <span>M|Clothing x Champion Jacket</span>
+        <h5>270 RON</h5>
+      </div>
+
+      
+</div>
+</div>
+
+<div class="collections-container">
+    <div class="product">
+        <div class="card" onclick="window.location.href='crop.html'">
+            <a href="crop.html">
+                <img class="shirt" src="a4afem.png" alt="shirt" >
+            </a>
+          
+          <span>M|Clothing Crop</span>
+          <h5>210 RON</h5>
+        </div>
+       
+        <div class="card"> 
+            <img src="a5afem.png" alt="tshirt">
+            <span>M|Clothing Hoodie</span>
+            <h5>250 RON</h5>
+          </div>
+    
+          <div class="card">
+            <img src="a6afemunisex.png" alt="hoodie">
+            <span>M|Clothing Hoodie</span>
+            <h5>290 RON</h5>
+          </div>
+    
+          
+    </div>
+    </div>
+
+
+
+</section>
+<footer>
+    <div class="footer-container">
+        <div class="logo-col">
+            <img src="m_logo_black-removebg-preview.png" class="logo">
+        </div>
+        <div class="contact-col">
+            <div class="contact-list">
+                <div class="contact-container">
+                    <p><a href="contact.html">Contact</a></p>
+                    <p>Bd. Unirii</p>
+                    <p><a href="about.html">About</a></p>
+                    <p><a href="mailto:mclothingstoredesign@gmail.com" class="email-id">
+                        mclothingstoredesign@gmail.com
+                    </a></p>
+                    <p><a href="collections.html">Collections</a></p>
+                    <p>0723555999</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+        const lines = document.getElementById("hamburger-lines");
+        const icon = document.getElementById("hamburger-icon");
+    
+        hamburger.addEventListener("click", () => {
+            navLinks.classList.toggle("nav-active");
+    
+            // Schimbă între ☰ și X
+            if (navLinks.classList.contains("nav-active")) {
+                lines.style.display = "none";  // Ascunde ☰
+                icon.style.display = "block";  // Afișează X
+            } else {
+                lines.style.display = "block"; // Afișează ☰
+                icon.style.display = "none";   // Ascunde X
+            }
+        });
+    });
+    
+    
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    </body>

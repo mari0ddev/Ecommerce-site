@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> 
+    <title>M | Clothing Store</title>
+</head>
+<body>
+    
+     
+    
+    
+    <header>
+        <a href="index.html">
+            <img class="logo" src="m_logo_black-removebg-preview.png" alt="Logo" >
+        </a>
+        
+        <nav> 
+            <ul class="nav-links">
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="collections.html">Collections</a></li>
+            </ul>
+            
+        </nav>
+        <div class="hamburger">
+            <span id="hamburger-lines">&#9776;</span> 
+            <img src="black-x-10353.png" alt="Close Menu" width="30px"; id="hamburger-icon" style="display: none; " >
+        </div>
+    </header>
+    <section id="clothes">
+        <h2>My collections</h2>
+        <div class="container-clothes">
+            <div class="product">
+                <div class="card">
+                    <img src="under-armour-hoodie-black-front-2-67c0719bb9e66.png" alt="hoodie" class="image">
+                    <h3>Under Armour Hoodie</h3>
+                <p>300 RON</p>
+                </div>
+                <div class="card">
+                    <img src="a doua poza index.png" alt="shirt" class="image">
+                    <h3>Tricou M|Clothing M logo</h3>
+                <p>300 RON</p>
+                </div>
+                <div class="card">
+                    <img src="a 3 a index.png" alt="shirt" class="image">
+                    <h3>Tricou M|Clothing x Zeus</h3>
+                    <p>250 RON</p>
+                </div>
+            </div>
+            
+        </div>
+            <div class="container-clothes">
+            <div class="product">
+                <div class="card">
+                    <img src="adidas-sport-polo-shirt-black-front-67e5c2dfce30d.png" alt="polo" class="image">
+                    <h3>M|Clothing x Adidas Women</h3>
+                <p>350 RON</p>
+                </div>
+                <div class="card">
+                    <img src="poza5index.png" alt="shirt" class="image">
+                    <h3>Tricou M|Clothing</h3>
+                <p>200 RON</p>
+                </div>
+                <div class="card">
+                    <img src="poza a 6a.png.png" alt="hoodie" class="image">
+                    <h3>Hoodie M|Clothing</h3>
+                    <p>250 RON</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+  <div class="quote-section">
+  
+   <h4>“WHERE STYLE MEETS INNOVATION."</h4>
+</div>
+
+<div class="section-container">
+<section id="new-arrival">
+<div class="box">
+ 
+    <a href="collections.html">
+        <img class="image" src="mens-champion-t-shirt-white-front-67c83494d0cab.png" alt="shirt" >
+    </a>
+    <div class="text-arrow">
+        <h3>NEW ARRIVAL FOR MEN</h3>
+        <a href="collections.html">
+            <img src="arrow-removebg-preview.png" class="arrow">
+        </a>
+        
+    </div>
+</div>
+<div class="box">
+    <a href="womencollections.html">
+        <img class="image" src="under-armour-hoodie-black-front-67c0719bbbb95.png" alt="shirt" >
+    </a>
+    <div class="text-arrow"> 
+     
+        <h3>NEW ARRIVAL FOR WOMEN</h3>
+      
+        <a href="womencollections.html">
+            <img src="arrow-removebg-preview.png" class="arrow">
+        </a>
+    </div>
+   
+</div>
+</section>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="logo-col">
+            <img src="m_logo_black-removebg-preview.png" class="logo">
+        </div>
+        <div class="contact-col">
+            <div class="contact-list">
+                <div class="contact-container">
+                    <p><a href="contact.html">Contact</a></p>
+                    <p>Bd. Unirii</p>
+                    <p><a href="about.html">About</a></p>
+                    <p><a href="mailto:mclothingstoredesign@gmail.com" class="email-id">
+                        mclothingstoredesign@gmail.com
+                    </a></p>
+                    <p><a href="collections.html">Collections</a></p>
+                    <p>0723555999</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.querySelector(".hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    const lines = document.getElementById("hamburger-lines");
+    const icon = document.getElementById("hamburger-icon");
+
+    hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("nav-active");
+
+        // Schimbă între ☰ și X
+        if (navLinks.classList.contains("nav-active")) {
+            lines.style.display = "none";  // Ascunde ☰
+            icon.style.display = "block";  // Afișează X
+        } else {
+            lines.style.display = "block"; // Afișează ☰
+            icon.style.display = "none";   // Ascunde X
+        }
+    });
+});
+
+
+</script>
+
+
+</body>
+</html>
