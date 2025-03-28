@@ -7,7 +7,7 @@ const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "https://for-cv-dun.vercel.app/" })); // Asigură-te că frontend-ul tău poate face request-uri
+app.use(cors({ origin: "https://for-cv-seven.vercel.app/ " })); // Asigură-te că frontend-ul tău poate face request-uri
 
 const storeItems = new Map([
     [1, { priceInCents: 19900, name: "Tricou M|clothing x Champion" }],
@@ -30,8 +30,8 @@ app.post("/create-checkout-session", async (req, res) => {
                     quantity: item.quantity,
                 };
             }),
-            success_url: `${process.env.CLIENT_URL}/success.html`,
-            cancel_url: `${process.env.CLIENT_URL}/cancel.html`,
+            success_url: `https://for-cv-seven.vercel.app/success.html`,
+            cancel_url: `https://for-cv-seven.vercel.app/cancel.html`,
         });
 
         res.json({ url: session.url });
