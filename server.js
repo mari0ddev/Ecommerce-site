@@ -7,7 +7,7 @@ const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5500" })); // Asigură-te că frontend-ul tău poate face request-uri
+app.use(cors({ origin: "https://for-cv-dun.vercel.app/" })); // Asigură-te că frontend-ul tău poate face request-uri
 
 const storeItems = new Map([
     [1, { priceInCents: 19900, name: "Tricou M|clothing x Champion" }],
