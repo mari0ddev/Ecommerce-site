@@ -7,7 +7,8 @@ const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: "https://for-cv-seven.vercel.app/ " })); // Asigură-te că frontend-ul tău poate face request-uri
+app.use(cors({ origin: "https://for-cv-seven.vercel.app" }));
+
 
 const storeItems = new Map([
     [1, { priceInCents: 19900, name: "Tricou M|clothing x Champion" }],
@@ -32,7 +33,6 @@ app.post("/create-checkout-session", async (req, res) => {
             }),
             success_url: `${process.env.CLIENT_URL}/success.html`,
             cancel_url: `${process.env.CLIENT_URL}/cancel.html`,
-            
         });
 
         res.json({ url: session.url });
@@ -41,9 +41,4 @@ app.post("/create-checkout-session", async (req, res) => {
     }
 });
 
-app.listen(3000, () => console.log("Server pornit pe https://for-cv-seven.vercel.app/"));
-const allowedOrigin = process.env.NODE_ENV === 'production'
-    ? 'https://for-cv-seven.vercel.app'  // CORS pentru Vercel în producție
-    : 'http://localhost:5500';             // CORS pentru localhost în dezvoltare
-
-app.use(cors({ origin: allowedOrigin }));
+app.listen(3000, () => console.log("Server pornit pe http://localhost:5500"));
