@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> 
+    <title>M|Clothing shop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<header>
+    <a href="index.html">
+        <img class="logo" src="m_logo_black-removebg-preview.png" alt="Logo" >
+    </a>
+    
+    <nav> 
+        <ul class="nav-links">
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="collections.html">Collections</a></li>
+        </ul>
+    </nav>
+    <div class="cart">
+        <img src="bag_png.png" alt="Cart" id="cart-icon" style="cursor: pointer;">
+        <span id="cart-count">0</span>
+    </div>
+    <div class="hamburger">
+        <span id="hamburger-lines">&#9776;</span> 
+        <img src="black-x-10353.png" alt="Close Menu" width="30px"; id="hamburger-icon" style="display: none; " >
+    </div>
+</header>
+
+<body>
+    <div id="cart-container" style="display: none;">
+        <div id="cart-items-container"></div>
+        <button id="checkout-btn" disabled>Plătește</button>
+    </div>
+
+    <section id="product-page">
+        <div class="product-container">
+            <div class="product-images">
+                <a href="poza main.html">
+                    <img class="main-img" src="mens-champion-t-shirt-black-left-front-67cefc7a55a2e.png" alt="img">
+                </a>
+                <div class="small-images">
+                    <img src="poza 5.png">
+                    <img src="poza 6.png">
+                </div>
+            </div>
+
+            <div class="product-details">
+                <h2>Tricou M|clothing x Champion 2709</h2>
+                <h3>199.99 LEI</h3>
+                <p><strong>Culoare:</strong> NEGRU</p>
+                <div class="color-options">
+                    <img src="mens-champion-t-shirt-black-back-67cefc7a55e8a.png">
+                </div>
+
+                <p><strong>Selectați mărimea:</strong></p>
+                <div class="size-options">
+                    <button class="size-btn" data-size="XS">XS</button>
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+
+                <button id="add-to-cart" class="add-to-cart" disabled>Adăugare</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let selectedSize = null;
+        
+            // Selectăm butoanele de mărime
+            document.querySelectorAll(".size-btn").forEach(button => {
+                button.addEventListener("click", function () {
+                    // Eliminăm selecția anterioară
+                    document.querySelectorAll(".size-btn").forEach(btn => btn.classList.remove("selected"));
+        
+                    // Selectăm mărimea curentă
+                    selectedSize = this.getAttribute("data-size");
+                    this.classList.add("selected");
+        
+                    // Activăm butonul de adăugare în coș
+                    document.getElementById("add-to-cart").disabled = false;
+                });
+            });
+        
+            // Adăugarea produsului în coș
+            document.getElementById("add-to-cart").addEventListener("click", function () {
+                if (!selectedSize) {
+                    alert("Te rog să selectezi o mărime!");
+                    return;
+                }
+        
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                cart.push({
+                    name: "Tricou M|clothing x Champion 2709",
+                    price: 199.99,
+                    size: selectedSize,
+                    quantity: 1
+                });
+        
+                localStorage.setItem("cart", JSON.stringify(cart));
+                updateCartCount();
+            });
+        
+            // Actualizarea numărului de produse în coș
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                document.getElementById("cart-count").textContent = cart.length;
+            }
+        
+            updateCartCount();
+        
+            // Redirecționează spre checkout
+            document.getElementById("cart-icon").addEventListener("click", function () {
+                window.location.href = "checkout.html";
+            });
+        });
+    </script>
+</body>
+</html>

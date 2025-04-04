@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css"> 
-    <title>Shop</title>
+    <title>Checkout - Bon de cumpărătur</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
@@ -31,42 +31,42 @@
     </div>
 </header>
 <body>
-    <script src="script.js" defer></script>
+    
     <section id="product-page">
         <div class="product-container">
          
             <div class="product-images">
             
                 <a href="poza main.html">
-            <img class="main-img" src="mens-champion-t-shirt-black-left-front-67cefc7a55a2e.png" alt="img" >
+            <img class="main-img" src="womencrop main.png" alt="img" >
         </a>
         
                 <div class="small-images">
-                    <img src="poza 5.png">
-                    <img src="poza 6.png">
+                    <img src="women crop smal 1.png">
+                    <img src="women cropsmall2.png">
                 </div>
             </div>
     
             
             <div class="product-details">
-                <h2>Tricou M|cloting x Champion </h2>
-                <h3>199,99 LEI</h3>
+                <h2>Crop M|clothing </h2>
+                <h3>250 LEI</h3>
     
-                <p><strong>Culoare:</strong> NEGRU</p>
+                <p><strong>Culoare:</strong> WHITE</p>
                 <div class="color-options">
-                    <img src="mens-champion-t-shirt-black-back-67cefc7a55e8a.png">
+                    <img src="womencrop main.png">
                 
                 </div>
     
                 <p><strong>Selectați mărimea:</strong></p>
                 <div class="size-options">
-                    <button>XS</button>
-                    <button>S</button>
-                    <button>M</button>
-                    <button>L</button>
-                    <button>XL</button>
-                    <button>XXL</button>
+                    <button class="size-btn" data-size="XS">XS</button>
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
                 </div>
+                
     
                 <button class="add-to-cart">Adăugare</button>
                 <div id="cart-container"></div> 
@@ -77,6 +77,10 @@
  
     </section>
     
+    <div id="cart-container" style="display: none;">
+        <div id="cart-items-container"></div>
+        <button id="checkout-btn" disabled>Plătește</button>
+    </div>
 
     <script>
 
@@ -92,111 +96,62 @@ smallImgs.forEach(img => {
  
 
     </script>
+ 
 
-
+<script src="https://js.stripe.com/v3/"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-    const cartIcon = document.getElementById("cart-icon");
-    const cartCount = document.getElementById("cart-count");
-    const addToCartButtons = document.querySelectorAll(".add-to-cart");
-    let cart = [];
-
-    // 🛍️ Adaugă produs în coș
-    addToCartButtons.forEach((button, index) => {
-        button.addEventListener("click", () => {
-            const product = {
-                id: index + 1,
-                name: "Tricou M|cloting x Champion",
-                price: 199.99,
-                quantity: 1,
-            };
-
-            const existingItem = cart.find(item => item.id === product.id);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push(product);
-            }
-
-            updateCartCount();
-            localStorage.setItem("cart", JSON.stringify(cart)); // 🔄 Salvează coșul
-        });
-    });
-
-    // 🔄 Actualizează numărul de produse din coș
-    function updateCartCount() {
-        let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-        cartCount.textContent = totalItems;
-    }
-
-    // 🛒 Încarcă coșul la reîncărcare
-    function loadCart() {
-        const storedCart = localStorage.getItem("cart");
-        if (storedCart) {
-            cart = JSON.parse(storedCart);
-            updateCartCount();
-        }
-    }
-
-    loadCart(); // 🔄 Încarcă coșul la început
-
-    // 📦 Când apasă pe coș → Trimite la checkout
-    cartIcon.addEventListener("click", () => {
-        window.location.href = "checkout.html";
-    });
-});
-</script>
-
-
-
-
-<script>document.addEventListener("DOMContentLoaded", () => {
-    const cartContainer = document.getElementById("cart-items");
-    const totalElement = document.getElementById("cart-total");
-
-    function updateCart() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        cartContainer.innerHTML = ""; // Curățăm lista produselor
-        
-        let total = 0;
-        cart.forEach((item, index) => {
-            const div = document.createElement("div");
-            div.innerHTML = `
-                <p>${item.quantity} x ${item.name} - ${item.price} LEI</p>
-                <button class="remove-item" data-index="${index}">Șterge</button>
-            `;
-            cartContainer.appendChild(div);
-            total += item.price * item.quantity;
-        });
-
-        totalElement.textContent = `Total: ${total} LEI`;
-
-        // Dacă coșul e gol, ștergem și din localStorage
-        if (cart.length === 0) {
-            localStorage.removeItem("cart");
-        }
-    }
-
-    // Ștergerea unui produs din coș
-    cartContainer.addEventListener("click", (e) => {
-        if (e.target.classList.contains("remove-item")) {
-            let cart = JSON.parse(localStorage.getItem("cart")) || [];
-            const index = e.target.getAttribute("data-index");
-
-            cart.splice(index, 1); // Ștergem produsul din listă
-            localStorage.setItem("cart", JSON.stringify(cart));
-            updateCart(); // Actualizăm interfața și totalul
-        }
-    });
-
-    updateCart(); // Afișăm coșul la încărcarea paginii
+    document.addEventListener("DOMContentLoaded", () => {
+        let selectedSize = null;
     
-});
+        // Selectăm butoanele de mărime
+        document.querySelectorAll(".size-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                // Eliminăm selecția anterioară
+                document.querySelectorAll(".size-btn").forEach(btn => btn.classList.remove("selected"));
+    
+                // Selectăm mărimea curentă
+                selectedSize = this.getAttribute("data-size");
+                this.classList.add("selected");
+    
+                // Activăm butonul de adăugare în coș
+                document.querySelector(".add-to-cart").disabled = false;
+            });
+        });
+    
+        // Adăugarea produsului în coș
+        document.querySelector(".add-to-cart").addEventListener("click", function () {
+            if (!selectedSize) {
+                alert("Te rog să selectezi o mărime!");
+                return;
+            }
+    
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.push({
+                name: "Crop M|clothing",
+                price: 250,
+                size: selectedSize,
+                quantity: 1
+            });
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+        });
+    
+        // Actualizarea numărului de produse în coș
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cart-count").textContent = cart.length;
+        }
+    
+        updateCartCount();
+    
+        // Redirecționează spre checkout
+        document.getElementById("cart-icon").addEventListener("click", function () {
+            window.location.href = "checkout.html";
+        });
+    });
 </script>
-
-
-
 
 
 
@@ -254,5 +209,15 @@ document.addEventListener("DOMContentLoaded", () => {
     
     </script>
       
+      
+
+
+      
+
+
+
+
+
+
 </body>
 </html>

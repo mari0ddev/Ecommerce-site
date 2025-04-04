@@ -17,63 +17,104 @@
     </div>
 
 
+    <script src="https://js.stripe.com/v3/"></script>
+
+
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const cartItemsContainer = document.getElementById("cart-items");
             const totalPriceElement = document.getElementById("total-price");
             const checkoutBtn = document.getElementById("checkout-btn");
-        
+    
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
             let totalPrice = 0;
-        
-            function updateCartDisplay() {
+    
+            function updateCheckoutDisplay() {
                 cartItemsContainer.innerHTML = "";
                 totalPrice = 0;
-        
+    
                 if (cart.length === 0) {
                     cartItemsContainer.innerHTML = "<p>Coșul tău este gol.</p>";
                     checkoutBtn.style.display = "none";
                     return;
                 }
-        
+    
                 cart.forEach((item, index) => {
                     const div = document.createElement("div");
                     div.classList.add("receipt-item");
                     div.innerHTML = `
-                        <p>${item.quantity} x ${item.name} <span>${(item.quantity * item.price).toFixed(2)} LEI</span></p>
+                        <p>${item.quantity} x ${item.name} (Mărime: ${item.size}) <span>${(item.quantity * item.price).toFixed(2)} LEI</span></p>
                         <button class="remove-item" data-index="${index}">🗑️</button>
                     `;
                     cartItemsContainer.appendChild(div);
                     totalPrice += item.quantity * item.price;
                 });
-        
+    
                 totalPriceElement.textContent = totalPrice.toFixed(2);
-        
+    
                 document.querySelectorAll(".remove-item").forEach(button => {
                     button.addEventListener("click", function () {
                         const index = this.getAttribute("data-index");
                         cart.splice(index, 1);
                         localStorage.setItem("cart", JSON.stringify(cart));
-                        updateCartDisplay();
+                        updateCheckoutDisplay();
                     });
                 });
             }
-        
-            updateCartDisplay();
-        
+    
+            updateCheckoutDisplay();
+    
+            // Când apeși pe butonul "Plătește", trimite produsele la server
             checkoutBtn.addEventListener("click", () => {
                 fetch("http://localhost:3000/create-checkout-session", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ items: cart }),
                 })
-                .then(res => res.json())
-                .then(({ url }) => window.location = url)
-                .catch(err => console.error("Eroare la checkout:", err));
+                .then((res) => res.json())
+                .then(({ url }) => {
+                    window.location.href = url;
+                })
+                .catch((err) => {
+                    console.error("Eroare la checkout:", err);
+                });
             });
         });
-        </script>
-        
+    </script>
+
+    
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const checkoutBtn = document.getElementById("checkout-btn");
+
+        checkoutBtn.addEventListener("click", () => {
+            // Presupunem că cart-ul este stocat în localStorage
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+            // Verifică dacă există produse în coș
+            if (cart.length === 0) {
+                alert("Coșul este gol! Adăugați produse pentru a plăti.");
+                return;
+            }
+
+            fetch("http://localhost:5500/create-checkout-session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ items: cart })
+            })
+            .then((res) => res.json())
+            .then(({ url }) => {
+                window.location.href = url; // Redirecționează către Stripe
+            })
+            .catch((err) => {
+                console.error("Eroare la procesarea plății:", err);
+            });
+        });
+    });
+</script>
+  
+
+
     
 
 </body>
