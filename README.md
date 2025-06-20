@@ -1,26 +1,64 @@
-# 🛒 Simple Clothing Shop
 
-A minimalist online clothing store with Stripe integration for payments. Products are fetched from a Node.js server using a custom backend API.
 
-## 🔧 Technologies used
-- HTML, CSS, JavaScript (frontend)
-- Node.js, Express (backend)
-- Stripe API for payment processing
-- JSON for product management
-- CORS for cross-origin request handling
+ *README — Simple E-Commerce Store*
 
-## 🖥️ Backend (server)
-The application uses a **Node.js** server with **Express** serving static files from the `public` directory. The server also includes an endpoint for payment processing using **Stripe**:
+# 🛒 Simple E-Commerce Store
 
-- **POST `/create-checkout-session`**: Creates a Stripe checkout session with the products selected by the user.
-- **GET `/checkout`**: Serves the `checkout.html` file for users who want to complete the payment.
-- **GET `/`**: Serves the main `index.html` file.
+A minimalist online shop with simulated checkout built with  HTML, CSS, JavaScript (frontend)
+Node.js, Express (backend) Stripe API for payment processing JSON for product management CORS for cross-origin request handling.
 
-## 💳 Payment Processing
-Stripe is used to create checkout sessions and manage online payments. When the user submits products for processing, they are added to the payment session and sent to Stripe for processing.
+---
 
-## 🔜 To-Do / Future Enhancements
-- **Adding product images**: Currently, the app only includes two images for categories (men and women), but I will connect each product in these categories to the Stripe processing system.
-- **Creating a product database**: I will connect each product with an external database to offer more products, with images and detailed description.
-- **Creating an admin panel**: To add, edit and delete products from the collection on the site.
-- **User authentication**: Implementing an authentication system for customers and administrators.
+# ✨ Features
+- Product listing and cart
+- Simulated checkout with Stripe API
+- Backend with Node.js and Express
+- Fetch products via API
+- Responsive design
+
+---
+
+# 🛠️ Technologies
+- Frontend: React, JavaScript (ES6+), CSS
+- Backend: Node.js, Express
+- Payment: Stripe API
+- Other: Git, JSON, CORS
+
+---
+
+# 🖥️ Backend
+- `POST /create-checkout-session` — Creates a Stripe checkout session
+- `GET /checkout` — Serves the checkout page
+- `GET /` — Serves the main shop page
+
+---
+
+# 🔮 Future Plans
+- Add product images and descriptions
+- User authentication
+- Integrate with a real product database
+
+---
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/mari0ddev/Ecommerce-site.git
+   cd Ecommerce-site
+2. Install dependencies:
+   npm install
+   npm install -g nodemon
+3. Start the application:
+   nodemon server.js
+4. Open the app in your browser:
+   http://localhost:5500
+
+Make sure you have Node.js and npm installed before running the project.
+
+
+# 📸 Screenshot 
+
+  1 Homepage --- https://i.imgur.com/OipcEGv.png
+  2 Product page --- https://i.imgur.com/3QMr5P1.png
+  3 Cart preview --- https://i.imgur.com/ZIKk157.png
+  4 Checkout screen --- https://i.imgur.com/7MLAxY6.png
+
